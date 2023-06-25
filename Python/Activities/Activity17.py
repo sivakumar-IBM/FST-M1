@@ -1,4 +1,6 @@
 # writing CSV files
+import os
+
 import pandas
 
 userdata = {
@@ -10,4 +12,8 @@ userdatadf = pandas.DataFrame(userdata)
 
 print(userdatadf)
 
-userdatadf.to_csv('../Activity17data.csv', index=False)
+if os.path.exists('../Activity17data.csv'):
+    os.remove('../Activity17data.csv')
+    userdatadf.to_csv('../Activity17data.csv', index=False)
+else:
+    userdatadf.to_csv('../Activity17data.csv', index=False)
