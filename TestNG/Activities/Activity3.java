@@ -17,6 +17,7 @@ public class Activity3 {
     @BeforeClass
     public void driverinititae() {
         // Set up the Firefox driver
+        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
         System.out.println("Driver initiated");
@@ -26,10 +27,11 @@ public class Activity3 {
 
     @Test
     public void openbrowser() {
-
+        //find username and password and click login button
         driver.findElement(By.id("username")).sendKeys("admin");
         driver.findElement(By.id("password")).sendKeys("password");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
+        //Get the confirm msg
         String confirmMessage = driver.findElement(By.id("action-confirmation")).getText();
         System.out.println("Confirmation message is :" + confirmMessage);
         Assert.assertEquals(confirmMessage, "Welcome Back, admin");
@@ -38,6 +40,7 @@ public class Activity3 {
 
     @AfterClass
     public void closedriver() {
+        //Closet the driver
         driver.close();
         System.out.println("Driver closed");
     }
