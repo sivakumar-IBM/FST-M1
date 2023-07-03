@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/java/Features",
         glue = {"StepDefinitions"},
         tags = "@SimpleAlert",
-        plugin = {"junit: test-reports/xml-report.junit"},
+        plugin = {"junit: test-reports/junit-report.junit"},
         monochrome = true
 )
 
