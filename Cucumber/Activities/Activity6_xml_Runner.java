@@ -9,9 +9,8 @@ import org.junit.runner.RunWith;
         features = "src/test/java/Features",
         glue = {"StepDefinitions"},
         tags = "@SimpleAlert",
-        plugin = {"junit: test-reports/xml-report.xml"},
-        monochrome = true,
-        dryRun = true
+        plugin = {"junit: test-reports/xml-report.junit"},
+        monochrome = true
 )
 
 public class Activity6_xml_Runner {
