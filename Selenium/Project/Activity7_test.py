@@ -43,6 +43,8 @@ class TestPostJob:
         # validate success msg
         assert successMsg.text == "Job listed successfully. To view your listing click here."
         self.driver.find_element(By.XPATH, "//li[@id='menu-item-24']/a[text()='Jobs']").click()
+        searchText = self.driver.find_element(By.ID, "search_keywords")
+        searchText.send_keys(JobTitle, keys.Keys.ENTER)
         firstJob = WebDriverWait(self.driver, 20).until(
             EC.visibility_of_element_located((By.XPATH, "//div[@class='position']/h3[1]"))).text
         print("first job is :" + firstJob)

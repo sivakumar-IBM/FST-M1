@@ -16,7 +16,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 public class Activity7 {
@@ -25,6 +27,8 @@ public class Activity7 {
     WebDriverWait wait;
 
     Actions actions;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+    String randomnumber =sdf.format(new Date());
 
     @BeforeClass
     public void driverinititae() {
@@ -57,7 +61,7 @@ public class Activity7 {
             System.out.println("Sign in button already there");
         }
         Select selectJobType = new Select(driver.findElement(By.id("job_type")));
-        String JobTitle = "Test Job";
+        String JobTitle = "Test Job-"+randomnumber;
         driver.findElement(By.id("job_title")).sendKeys(JobTitle);
         driver.findElement(By.id("job_location")).sendKeys("India");
         selectJobType.selectByVisibleText("Internship");
@@ -73,6 +77,9 @@ public class Activity7 {
         Assert.assertEquals(successMsg.getText(), "Job listed successfully. To view your listing click here.");
         //validate job posted is available in jobs
         driver.findElement(By.xpath("//li[@id='menu-item-24']/a[text()='Jobs']")).click();
+        WebElement searchText =driver.findElement(By.id("search_keywords"));
+        //Enter Banks
+        searchText.sendKeys(JobTitle, Keys.RETURN);
         WebElement firstJob = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='position']/h3[1]")));
         Assert.assertEquals(firstJob.getText(), JobTitle);
 
@@ -81,7 +88,7 @@ public class Activity7 {
     @AfterClass
     public void closedriver() {
         //Closet the driver
-        driver.close();
+//        driver.close();
         System.out.println("Close the browser");
     }
 
