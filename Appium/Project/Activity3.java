@@ -2,6 +2,8 @@ package project;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -57,10 +59,30 @@ public class Activity3 {
         for (String ac : taskList) {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.EditText[@resource-id='taskInput']"))).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//android.widget.EditText[@resource-id='taskInput']"))).sendKeys(ac);
-            driver.findElement(AppiumBy.androidUIAutomator("text(\"Add Task\")")).click();
+//            Thread.sleep(3000);
+//            driver.findElement(AppiumBy.androidUIAutomator("text(\"Add Task\")")).click();
+//            driver.findElement(AppiumBy.xpath("//android.widget.Button[@text=\"Add Task\"]")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.Button[@text=\"Add Task\"]")));
+            driver.pressKey(new KeyEvent(AndroidKey.TAB));
+            driver.pressKey(new KeyEvent(AndroidKey.ENTER));
         }
-        List<WebElement> taskLists = driver.findElements(AppiumBy.xpath("//android.view.View[@text=='Add more tasks to this list.']/following-sibling::android.view.View[@text!='']"));
+//        Get the size of task after adding
+        List<WebElement> taskLists = driver.findElements(AppiumBy.xpath("//android.view.View[contains(@text,'Add more tasks')]/parent::android.view.View/following-sibling::android.view.View"));
         System.out.println("no of tasks added :" + taskLists.size());
+        Assert.assertEquals(taskLists.size(),3);
+
+        //Click each of tasks to strike out
+        for (WebElement ac : taskLists) {
+            ac.click();
+            Thread.sleep(1000);
+        }
+        driver.findElement(AppiumBy.androidUIAutomator("text(\" Clear List\")")).click();
+        Thread.sleep(2000);
+
+        // Get the size of task after strike and clear the list
+        List<WebElement> taskListsafterClear = driver.findElements(AppiumBy.xpath("//android.view.View[contains(@text,'Add more tasks')]/parent::android.view.View/following-sibling::android.view.View"));
+        System.out.println("no of tasks added :" + taskListsafterClear.size());
+        Assert.assertEquals(taskListsafterClear.size(),0);
 
     }
 
