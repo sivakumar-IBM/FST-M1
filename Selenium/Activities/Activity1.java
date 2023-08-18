@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class Activity1 {
     public static void main(String[] args) {
         // Set up Firefox driver
+
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         WebDriverManager.firefoxdriver().setup();
         // Create a new instance of the Firefox driver
