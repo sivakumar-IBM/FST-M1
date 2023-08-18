@@ -1,5 +1,4 @@
-package activities;
-
+package Activities;
 import java.util.*;
 
 public class Activity13 {
@@ -12,7 +11,7 @@ public class Activity13 {
         System.out.print("Enter integers please ");
         System.out.println("(EOF or non-integer to terminate): ");
 
-        while (scan.hasNextInt()) {
+        while(scan.hasNextInt()) {
             list.add(scan.nextInt());
         }
 

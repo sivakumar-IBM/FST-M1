@@ -1,4 +1,4 @@
-package activities;
+package Activities;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Activity15 {
 
-    private static final String FILE_NAME = "src/test/resources/TestSheet.xlsx";
+    private static final String FILE_NAME = "TestSheet.xlsx";
 
     public static void main(String[] args) {
 
